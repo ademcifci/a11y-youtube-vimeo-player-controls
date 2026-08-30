@@ -1,0 +1,494 @@
+/* ==========================================================================
+   A11y YouTube/Vimeo Player Controls — styles
+   - Demo page layout
+   - Player shell, controls (below video), footer, and error states
+   ========================================================================== */
+
+/* --- Design tokens --- */
+:root {
+  color-scheme: light dark;
+  --a11y-bg: #0d0d0d;
+  --a11y-surface: rgba(15, 15, 15, 0.92);
+  --a11y-text: #fff;
+  --a11y-muted: rgba(255, 255, 255, 0.72);
+  --a11y-accent: #ff0033;
+  --a11y-accent-soft: #ff4d6d;
+  --a11y-border: rgba(255, 255, 255, 0.12);
+  --a11y-focus: #ffbf47;
+  --a11y-error: #ff6b6b;
+  --a11y-btn-size: 44px;
+  --a11y-track: rgba(255, 255, 255, 0.25);
+  --a11y-track-fill: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f7f7;
+  color: #111;
+  line-height: 1.5;
+}
+
+/* --- Demo page --- */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.page h1 {
+  margin-top: 0;
+}
+
+.page-intro {
+  max-width: 70ch;
+}
+
+.demo-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.demo-form label {
+  flex: 1 1 100%;
+  font-weight: 600;
+}
+
+.demo-required {
+  font-weight: 400;
+  color: #555;
+}
+
+.demo-hint {
+  flex: 1 1 100%;
+  margin: -0.25rem 0 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.demo-form input[type="url"],
+.demo-form input[type="text"] {
+  flex: 1 1 280px;
+  min-height: var(--a11y-btn-size);
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.demo-form button {
+  min-height: var(--a11y-btn-size);
+  min-width: 8rem;
+  padding: 0.5rem 1rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--a11y-accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.demo-form button:focus-visible,
+.demo-form input:focus-visible {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 2px;
+}
+
+.demo-error {
+  color: #a40000;
+  font-weight: 600;
+  min-height: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+.demo-form input[aria-invalid="true"] {
+  border-color: #a40000;
+}
+
+.embed-example {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.embed-example pre {
+  overflow-x: auto;
+  padding: 0.75rem;
+  background: #f0f0f0;
+  border-radius: 6px;
+}
+
+/* --- Player mount and loading state --- */
+.a11y-player-mount,
+.demo-player {
+  width: 100%;
+  margin: 1rem 0 2rem;
+}
+
+.a11y-player-mount[data-loading] {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+}
+
+.a11y-player-mount[data-loading]::after {
+  content: 'Loading player…';
+  color: #555;
+}
+
+/* --- Player shell --- */
+.a11y-player {
+  --player-bg: var(--a11y-bg);
+  --player-text: var(--a11y-text);
+  width: 100%;
+  background: var(--player-bg);
+  color: var(--player-text);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.a11y-player:focus {
+  outline: none;
+}
+
+.a11y-player:focus-visible {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 2px;
+}
+
+/* Visually hidden; still available to screen readers */
+.a11y-player__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.a11y-player--controls-disabled .a11y-player__controls {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.a11y-player--controls-disabled .a11y-player__footer {
+  opacity: 0.85;
+}
+
+/* --- Video area (16:9); captions render inside the iframe above controls --- */
+.a11y-player__video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+  background: #000;
+}
+
+.a11y-player__video,
+.a11y-player__embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.a11y-player__embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- Control bar (sits below video, not overlaid) --- */
+.a11y-player__controls {
+  position: relative;
+  z-index: 1;
+  padding: 0.65rem 0.75rem 0.75rem;
+  background: rgba(0, 0, 0, 0.92);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.a11y-player__progress {
+  margin-bottom: 0.35rem;
+}
+
+.a11y-player__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.a11y-player__bar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  min-height: var(--a11y-btn-size);
+}
+
+.a11y-player__bar-group--right {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.a11y-player__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--a11y-btn-size);
+  min-height: var(--a11y-btn-size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--player-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.a11y-player__btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.a11y-player__btn:active {
+  transform: scale(0.94);
+}
+
+.a11y-player__btn:focus-visible,
+.a11y-player__seek:focus-visible,
+.a11y-player__volume-input:focus-visible {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 2px;
+}
+
+.a11y-player__btn--play {
+  margin-right: 0.15rem;
+}
+
+.a11y-player__btn--play .a11y-player__btn-icon--pause,
+.a11y-player__btn--mute .a11y-player__btn-icon--muted {
+  display: none;
+}
+
+.a11y-player__btn--play.is-playing .a11y-player__btn-icon--play,
+.a11y-player__btn--mute.is-muted .a11y-player__btn-icon--volume {
+  display: none;
+}
+
+.a11y-player__btn--play.is-playing .a11y-player__btn-icon--pause,
+.a11y-player__btn--mute.is-muted .a11y-player__btn-icon--muted {
+  display: inline-flex;
+}
+
+.a11y-player__btn--captions.is-active {
+  color: var(--a11y-accent-soft);
+}
+
+.a11y-player__icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
+}
+
+.a11y-player__btn--play .a11y-player__icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.a11y-player__time {
+  margin-left: 0.35rem;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--a11y-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.a11y-player__volume {
+  width: min(6.5rem, 18vw);
+  margin: 0 0.15rem;
+}
+
+.a11y-player__seek,
+.a11y-player__volume-input {
+  --range-progress: 0%;
+  width: 100%;
+  height: 1.25rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.a11y-player__seek::-webkit-slider-runnable-track,
+.a11y-player__volume-input::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--a11y-track-fill) var(--range-progress),
+    var(--a11y-track) var(--range-progress)
+  );
+}
+
+.a11y-player__seek::-webkit-slider-thumb,
+.a11y-player__volume-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.a11y-player__seek::-moz-range-track,
+.a11y-player__volume-input::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--a11y-track);
+}
+
+.a11y-player__seek::-moz-range-progress,
+.a11y-player__volume-input::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--a11y-track-fill);
+}
+
+.a11y-player__seek::-moz-range-thumb,
+.a11y-player__volume-input::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* --- Footer: visible errors + sr-only status + keyboard help --- */
+.a11y-player__footer {
+  padding: 0.5rem 0.75rem 0.75rem;
+  background: var(--a11y-surface);
+  border-top: 1px solid var(--a11y-border);
+}
+
+.a11y-player__error {
+  margin: 0 0 0.35rem;
+  color: var(--a11y-error);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.a11y-player__error:empty,
+.a11y-player__error[hidden] {
+  display: none;
+}
+
+.a11y-player__help {
+  margin: 0;
+  color: var(--a11y-muted);
+  font-size: 0.85rem;
+}
+
+.a11y-player__help summary {
+  cursor: pointer;
+  color: var(--a11y-muted);
+  user-select: none;
+}
+
+.a11y-player__help summary:focus-visible {
+  outline: 3px solid var(--a11y-focus);
+  outline-offset: 2px;
+}
+
+.a11y-player__help p {
+  margin: 0.5rem 0 0;
+}
+
+.a11y-player__help kbd {
+  display: inline-block;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--a11y-border);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.85em;
+}
+
+/* --- Fatal embed error state --- */
+.a11y-player--error .a11y-player__video-wrap {
+  display: none;
+}
+
+.a11y-player--error .a11y-player__footer {
+  padding-top: 0.75rem;
+}
+
+/* --- Responsive layout --- */
+@media (max-width: 640px) {
+  .a11y-player__controls {
+    padding-top: 0.55rem;
+  }
+
+  .a11y-player__bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .a11y-player__bar-group--left,
+  .a11y-player__bar-group--right {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .a11y-player__volume {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* --- Accessibility media queries --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .a11y-player__btn:focus-visible,
+  .a11y-player__seek:focus-visible,
+  .a11y-player__volume-input:focus-visible,
+  .a11y-player:focus-visible,
+  .demo-form button:focus-visible,
+  .demo-form input:focus-visible,
+  .a11y-player__help summary:focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .a11y-player__btn--captions.is-active {
+    color: LinkText;
+  }
+}

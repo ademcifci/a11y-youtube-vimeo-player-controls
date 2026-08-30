@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- A11y YouTube/Vimeo Player Controls demo page -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A11y YouTube/Vimeo Player Controls</title>
+    <link rel="stylesheet" href="css/player.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>A11y YouTube/Vimeo Player Controls</h1>
+      <p class="page-intro">
+        Custom keyboard- and screen-reader-friendly controls for YouTube and Vimeo embeds.
+        Native platform control bars are hidden; playback is driven through each platform’s official embed API.
+      </p>
+
+      <!-- Demo: load any supported YouTube or Vimeo URL -->
+      <form class="demo-form" data-demo-form novalidate>
+        <label for="video-url">
+          YouTube or Vimeo URL or video ID
+          <span class="demo-required" aria-hidden="true">(required)</span>
+        </label>
+        <p id="video-url-hint" class="demo-hint">
+          Enter a YouTube URL or 11-character video ID, or a Vimeo URL or numeric video ID.
+        </p>
+        <input
+          id="video-url"
+          name="video-url"
+          type="text"
+          data-demo-input
+          placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          required
+          aria-required="true"
+          aria-describedby="video-url-hint video-url-error"
+        />
+        <button type="submit">Load video</button>
+      </form>
+      <p id="video-url-error" class="demo-error" data-demo-error></p>
+
+      <!-- Player mount: populated by js/main.js createA11yPlayer() -->
+      <div class="demo-player" data-demo-player></div>
+
+      <!-- Declarative embed example -->
+      <section class="embed-example" aria-labelledby="embed-heading">
+        <h2 id="embed-heading">Embed on any page</h2>
+        <pre><code>&lt;div
+  data-a11y-player
+  data-platform="youtube"
+  data-video-id="dQw4w9WgXcQ"
+  data-title="Never Gonna Give You Up"
+&gt;&lt;/div&gt;
+&lt;script type="module" src="/a11y-youtube-vimeo-player-controls/js/main.js"&gt;&lt;/script&gt;</code></pre>
+      </section>
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
