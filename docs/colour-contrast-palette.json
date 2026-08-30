@@ -1,0 +1,212 @@
+{
+  "checks": [
+    {
+      "id": "demo-body-text",
+      "foreground": "#111111",
+      "background": "#f7f7f7",
+      "type": "text-normal",
+      "notes": "body, headings, labels"
+    },
+    {
+      "id": "demo-required-hint",
+      "foreground": "#555555",
+      "background": "#f7f7f7",
+      "type": "text-normal",
+      "notes": ".demo-required"
+    },
+    {
+      "id": "demo-hint",
+      "foreground": "#444444",
+      "background": "#f7f7f7",
+      "type": "text-normal",
+      "notes": ".demo-hint"
+    },
+    {
+      "id": "demo-input-text",
+      "foreground": "#111111",
+      "background": "#ffffff",
+      "type": "text-normal",
+      "notes": "text input value"
+    },
+    {
+      "id": "demo-input-border-vs-page",
+      "foreground": "#333333",
+      "background": "#f7f7f7",
+      "type": "ui",
+      "notes": "input border vs page background"
+    },
+    {
+      "id": "demo-input-border-vs-field",
+      "foreground": "#333333",
+      "background": "#ffffff",
+      "type": "ui",
+      "notes": "input border vs field interior"
+    },
+    {
+      "id": "demo-submit-button-text",
+      "foreground": "#ffffff",
+      "background": "#8b001c",
+      "type": "text-normal",
+      "notes": ".demo-form button"
+    },
+    {
+      "id": "demo-error-text",
+      "foreground": "#a40000",
+      "background": "#f7f7f7",
+      "type": "text-normal",
+      "notes": ".demo-error"
+    },
+    {
+      "id": "demo-invalid-border",
+      "foreground": "#a40000",
+      "background": "#f7f7f7",
+      "type": "ui",
+      "notes": "invalid input border"
+    },
+    {
+      "id": "demo-focus-on-page",
+      "foreground": "#b45309",
+      "background": "#f7f7f7",
+      "type": "ui",
+      "state": "focus",
+      "notes": "focus ring on page background"
+    },
+    {
+      "id": "demo-focus-on-input",
+      "foreground": "#b45309",
+      "background": "#ffffff",
+      "type": "ui",
+      "state": "focus",
+      "notes": "focus ring on text input"
+    },
+    {
+      "id": "demo-focus-on-button",
+      "foreground": "#ffbf47",
+      "background": "#8b001c",
+      "type": "ui",
+      "state": "focus",
+      "notes": "focus ring on submit button"
+    },
+    {
+      "id": "demo-loading-text",
+      "foreground": "#555555",
+      "background": "#f7f7f7",
+      "type": "text-normal",
+      "notes": "loading placeholder"
+    },
+    {
+      "id": "demo-embed-code",
+      "foreground": "#111111",
+      "background": "#f0f0f0",
+      "type": "text-normal",
+      "notes": "embed example pre"
+    },
+    {
+      "id": "demo-embed-border",
+      "foreground": "#949494",
+      "background": "#ffffff",
+      "type": "ui",
+      "notes": ".embed-example border"
+    },
+    {
+      "id": "player-primary-text",
+      "foreground": "#ffffff",
+      "background": "#0d0d0d",
+      "type": "text-normal",
+      "notes": "player shell text"
+    },
+    {
+      "id": "player-primary-text-on-controls",
+      "foreground": "#ffffff",
+      "background": "#010101",
+      "type": "text-normal",
+      "notes": "buttons/icons on control bar"
+    },
+    {
+      "id": "player-muted-time",
+      "foreground": "#B8B8B8",
+      "background": "#010101",
+      "type": "text-normal",
+      "notes": ".a11y-player__time (composited muted on controls)"
+    },
+    {
+      "id": "player-muted-help",
+      "foreground": "#BCBCBC",
+      "background": "#0F0F0F",
+      "type": "text-normal",
+      "notes": ".a11y-player__help (composited muted on footer)"
+    },
+    {
+      "id": "player-captions-active",
+      "foreground": "#ff4d6d",
+      "background": "#010101",
+      "type": "ui",
+      "notes": "active captions button icon"
+    },
+    {
+      "id": "player-error-text",
+      "foreground": "#ff6b6b",
+      "background": "#0F0F0F",
+      "type": "text-normal",
+      "notes": ".a11y-player__error"
+    },
+    {
+      "id": "player-footer-border",
+      "foreground": "#636363",
+      "background": "#0F0F0F",
+      "type": "ui",
+      "notes": "footer border (composited)"
+    },
+    {
+      "id": "player-controls-border",
+      "foreground": "#5A5A5A",
+      "background": "#010101",
+      "type": "ui",
+      "notes": "controls top border (composited)"
+    },
+    {
+      "id": "player-focus-on-controls",
+      "foreground": "#ffbf47",
+      "background": "#010101",
+      "type": "ui",
+      "state": "focus",
+      "notes": "focus ring on control bar"
+    },
+    {
+      "id": "player-focus-on-footer",
+      "foreground": "#ffbf47",
+      "background": "#0F0F0F",
+      "type": "ui",
+      "state": "focus",
+      "notes": "focus ring on footer/help"
+    },
+    {
+      "id": "player-seek-track",
+      "foreground": "#5A5A5A",
+      "background": "#010101",
+      "type": "ui",
+      "notes": "unfilled range track (composited)"
+    },
+    {
+      "id": "player-seek-fill",
+      "foreground": "#ffffff",
+      "background": "#5A5A5A",
+      "type": "ui",
+      "notes": "filled range track vs unfilled"
+    },
+    {
+      "id": "player-kbd-border",
+      "foreground": "#6C6C6C",
+      "background": "#1D1D1D",
+      "type": "ui",
+      "notes": "kbd border on kbd background"
+    },
+    {
+      "id": "player-kbd-text",
+      "foreground": "#BCBCBC",
+      "background": "#1D1D1D",
+      "type": "text-normal",
+      "notes": "kbd text in help section"
+    }
+  ]
+}
